@@ -1,0 +1,25 @@
+<div class="list-header">
+  <h6>{{ 'users' | translate }}</h6>
+
+  <button nbButton status="primary" size="medium">
+    <nb-icon icon="plus-outline"></nb-icon>
+
+    <span>{{ 'create-user' | translate }}</span>
+  </button>
+</div>
+
+<!-- <nb-card>
+  <nb-card-body>
+    <div class="d-flex justify-content-center align-items-center">
+      <nb-icon icon="alert-circle-outline" class="me-2"></nb-icon>
+
+      <span class="d-flex justify-content-center py-3">{{ 'no-users' | translate }}</span>
+    </div>
+  </nb-card-body>
+</nb-card> -->
+
+<ul>
+  <li>
+    <app-user-card></app-user-card>
+  </li>
+</ul>

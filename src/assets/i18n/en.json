@@ -1,0 +1,13 @@
+{
+  "title": "Task Manager",
+  "subtitle": "Manage your tasks and team members efficiently",
+  "tasks": "Tasks",
+  "users": "Users",
+  "create-task": "Create task",
+  "create-user": "Create user",
+  "no-tasks": "No tasks yet. Create your first task!",
+  "no-users": "No users yet. Create your first user!",
+  "created": "Created",
+  "modified": "Modified",
+  "assigned-tasks": "Assigned tasks"
+}

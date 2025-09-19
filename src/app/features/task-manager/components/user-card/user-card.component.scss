@@ -1,0 +1,14 @@
+.assigned-tasks {
+  gap: 0.5rem;
+
+  &__item {
+    background-color: #f9fafb;
+    border-radius: 0.25rem;
+    border: 0;
+
+    // Override Nebular styles
+    &:nth-child(1) {
+      border: 0;
+    }
+  }
+}

@@ -5,7 +5,11 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "paths": {
+      "@app/*": ["./src/app/*"],
+      "@assets/*": ["./src/assets/*"]
+    }
   },
   "include": [
     "src/**/*.spec.ts",

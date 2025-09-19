@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'assets/styles/reset';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+// Font sizes
+.fs-7 {
+  font-size: 0.875rem;
+}
+
+.fs-8 {
+  font-size: 0.75rem;
+}

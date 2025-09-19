@@ -1,0 +1,13 @@
+{
+  "title": "Aufgabenmanager",
+  "subtitle": "Verwalten Sie Ihre Aufgaben und Teammitglieder effizient",
+  "tasks": "Aufgaben",
+  "users": "Benutzer",
+  "create-task": "Aufgabe erstellen",
+  "create-user": "Benutzer erstellen",
+  "no-tasks": "Noch keine Aufgaben. Erstellen Sie Ihre erste Aufgabe!",
+  "no-users": "Noch keine Benutzer. Erstellen Sie Ihren ersten Benutzer!",
+  "created": "Erstellt",
+  "modified": "Geändert",
+  "assigned-tasks": "Zugewiesene Aufgaben"
+}
