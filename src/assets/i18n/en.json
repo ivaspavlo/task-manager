@@ -40,7 +40,8 @@
     "task-updated": "Task was updated",
     "user-created": "User was created",
     "user-deleted": "User was deleted",
-    "user-updated": "User was updated"
+    "user-updated": "User was updated",
+    "user-is-busy": "User is already busy with another task"
   },
   "errors": {
     "name-required": "Name is required",

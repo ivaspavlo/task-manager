@@ -26,14 +26,10 @@
           <nb-list-item class="assigned-tasks__item">
             <div class="w-100 d-flex justify-content-between align-items-center">
               <span>
-                <b>{{ 'Test task #1' }}</b>
+                <b>{{ task.name }}</b>
               </span>
 
-              <nb-tag
-                status="primary"
-                appearance="outline"
-                [text]="'in-progress' | translate"
-                class="mt-2"></nb-tag>
+              <app-task-status [state]="task.state"></app-task-status>
             </div>
           </nb-list-item>
         }

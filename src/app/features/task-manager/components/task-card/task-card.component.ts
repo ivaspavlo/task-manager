@@ -3,19 +3,31 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbTagModule } from '@nebula
 import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { ITask } from '@app/interfaces';
+import { ITask, IUser } from '@app/interfaces';
 import { TASK_STATE, TASK_STATE_MAP } from '@app/constants';
+import { TaskStatusComponent } from '../task-status/task-status.component';
+import { UserForTaskPipe } from '../../pipes/user-for-task.pipe';
 
 @Component({
   selector: 'app-task-card',
   standalone: true,
-  imports: [NbCardModule, NbButtonModule, NbTagModule, NbIconModule, TranslatePipe, DatePipe],
+  imports: [
+    DatePipe,
+    NbCardModule,
+    NbButtonModule,
+    NbTagModule,
+    NbIconModule,
+    TranslatePipe,
+    TaskStatusComponent,
+    UserForTaskPipe
+  ],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskCardComponent {
   @Input({ required: true }) task!: ITask;
+  @Input({ required: true }) users: IUser[] | null = [];
 
   @Output() delete: EventEmitter<ITask> = new EventEmitter();
   @Output() edit: EventEmitter<ITask> = new EventEmitter();

@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { AsyncPipe } from '@angular/common';
 import { NbCardModule, NbTabsetModule } from '@nebular/theme';
 import { Observable } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { ITask, IUser } from '@app/interfaces';
 import { TaskService, UserService } from '@app/services';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { TabTitlePipe } from './pipes/tab-title.pipe';
 
 @Component({
   selector: 'app-task-manager',
@@ -18,7 +18,7 @@ import { TabTitlePipe } from './pipes/tab-title.pipe';
     NbTabsetModule,
     TaskListComponent,
     UserListComponent,
-    TabTitlePipe
+    TranslatePipe
   ],
   templateUrl: './task-manager.component.html',
   styleUrl: './task-manager.component.scss',

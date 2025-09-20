@@ -58,7 +58,9 @@ export class TaskService {
 
   public deleteTasksOfUser(userId: string): void {
     const tasks = this.#tasks$.value.map(t =>
-      t.userId === userId ? { ...t, userId: null, state: TASK_STATE.IN_QUEUE } : t
+      t.userId === userId
+        ? { ...t, userId: null, state: TASK_STATE.IN_QUEUE, updatedAt: new Date() }
+        : t
     );
     this.#save(tasks);
   }

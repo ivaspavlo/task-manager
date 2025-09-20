@@ -2,33 +2,15 @@
   <nb-card-header>
     <div class="d-flex align-items-center justify-content-between w-100">
       <div>
-        <h6>{{ task.name }}</h6>
+        <div class="d-flex align-items-end gap-2">
+          <h6>{{ task.name }}</h6>
 
-        @switch (task.state) {
-          @case (taskState.DONE) {
-            <nb-tag
-              status="success"
-              appearance="outline"
-              [text]="taskStateMap[task.state] | translate"
-              class="mt-2"></nb-tag>
+          @if (task.userId) {
+            <span>{{ ' is assigned to: ' + (task.userId | userForTask: users) }}</span>
           }
+        </div>
 
-          @case (taskState.IN_PROCESS) {
-            <nb-tag
-              status="primary"
-              appearance="outline"
-              [text]="taskStateMap[task.state] | translate"
-              class="mt-2"></nb-tag>
-          }
-
-          @case (taskState.IN_QUEUE) {
-            <nb-tag
-              status="default"
-              appearance="outline"
-              [text]="taskStateMap[task.state] | translate"
-              class="mt-2"></nb-tag>
-          }
-        }
+        <app-task-status [state]="task.state"></app-task-status>
       </div>
 
       <div class="d-flex">

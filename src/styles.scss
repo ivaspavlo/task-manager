@@ -33,3 +33,11 @@
 .fs-8 {
   font-size: 0.75rem;
 }
+
+.app-lang {
+  nb-select {
+    button.select-button {
+      min-width: 7rem;
+    }
+  }
+}

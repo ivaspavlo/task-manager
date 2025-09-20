@@ -8,11 +8,20 @@ import {
   NbTagModule
 } from '@nebular/theme';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TaskStatusComponent } from '../task-status/task-status.component';
 
 @Component({
   selector: 'app-user-card',
   standalone: true,
-  imports: [NbCardModule, NbButtonModule, NbTagModule, NbIconModule, NbListModule, TranslatePipe],
+  imports: [
+    NbCardModule,
+    NbButtonModule,
+    NbTagModule,
+    NbIconModule,
+    NbListModule,
+    TranslatePipe,
+    TaskStatusComponent
+  ],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

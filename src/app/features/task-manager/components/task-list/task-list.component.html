@@ -174,8 +174,9 @@
         <li>
           <app-task-card
             [task]="task"
+            [users]="users$ | async"
             (delete)="onDeleteTask($event, deleteTaskDialog)"
-            (edit)="onEditTask($event, taskFormDialog)"></app-task-card>
+            (edit)="onEditTask($event, tasks, taskFormDialog)"></app-task-card>
         </li>
       }
     </ul>

@@ -133,7 +133,7 @@ export class TaskListComponent {
       });
   }
 
-  protected onEditTask(task: ITask, dialog: TemplateRef<unknown>): void {
+  protected onEditTask(task: ITask, tasks: ITask[], dialog: TemplateRef<unknown>): void {
     this.isEditMode = true;
 
     const prevUserId = task.userId;
@@ -162,10 +162,26 @@ export class TaskListComponent {
       .onClose.pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe((value: ITask | null | undefined) => {
         if (!value) {
+          this.isEditMode = false;
+          this.taskForm.reset();
           return;
         }
 
         const currUserId = value.userId;
+        const userIsBusy = tasks.some(
+          t => t.userId === currUserId && t.state === TASK_STATE.IN_PROGRESS
+        );
+
+        if (userIsBusy) {
+          this.#toastrService.danger(
+            this.#translateService.instant('Error'),
+            this.#translateService.instant('toasts.user-is-busy')
+          );
+
+          this.isEditMode = false;
+          this.taskForm.reset();
+          return;
+        }
 
         if (prevUserId && prevUserId !== currUserId) {
           this.#userService.deleteTaskFromUser(prevUserId, task.id);

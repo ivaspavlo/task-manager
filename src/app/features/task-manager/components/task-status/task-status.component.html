@@ -1,0 +1,25 @@
+@switch (state) {
+  @case (taskState.DONE) {
+    <nb-tag
+      status="success"
+      appearance="outline"
+      [text]="taskStateMap[state] | translate"
+      class="mt-2"></nb-tag>
+  }
+
+  @case (taskState.IN_PROGRESS) {
+    <nb-tag
+      status="primary"
+      appearance="outline"
+      [text]="taskStateMap[state] | translate"
+      class="mt-2"></nb-tag>
+  }
+
+  @case (taskState.IN_QUEUE) {
+    <nb-tag
+      status="default"
+      appearance="outline"
+      [text]="taskStateMap[state] | translate"
+      class="mt-2"></nb-tag>
+  }
+}

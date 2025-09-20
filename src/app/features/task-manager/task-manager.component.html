@@ -1,13 +1,15 @@
 <nb-card class="w-100">
   <nb-card-body>
     <nb-tabset fullWidth>
-      <nb-tab tabIcon="person-outline" [tabTitle]="'tasks' | tabTitle: (tasks$ | async)?.length">
+      <nb-tab
+        tabIcon="person-outline"
+        [tabTitle]="('tasks' | translate) + ' (' + ((tasks$ | async)?.length || 0) + ')'">
         <app-task-list></app-task-list>
       </nb-tab>
 
       <nb-tab
         tabIcon="checkmark-square-outline"
-        [tabTitle]="'users' | tabTitle: (users$ | async)?.length">
+        [tabTitle]="('users' | translate) + ' (' + ((users$ | async)?.length || 0) + ')'">
         <app-user-list></app-user-list>
       </nb-tab>
     </nb-tabset>
