@@ -2,26 +2,48 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
 
-## Development server
+## Project structure
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- `constants` folder - contains enums, injection tokens and other one-of-a-kind data;
+- `interfaces` folder - contains global interfaces;
+- `services` folder - contains global services: TaskService, UserService and LocalStorageService;
+- `features` folder - contains actual pages of the application: Welcome and Task Manager. All the underlying components for Task Manager are contained within it's folder.
 
-## Code scaffolding
+## Project functionality
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Basic
 
-## Build
+- Tasks CRUD.
+- Task minimal data structure: name / description / create date / update date / state ('in queue' | 'in progress' | 'done').
+- Users CRUD.
+- User minimal data structure: name.
+- Tasks can be assigned to users.
+- Task can be assigned to one user only.
+- Task which is not assigned to any user can take 'in queue' state only.
+- The same user cannot be assigned to more than one task which is ‘in progress’.
+- Listing the tasks displayed data: task name, create and update date, assigned users and task states.
+- Listing the users displayed data: user name and assigned tasks.
+- Data storing is done in browser's storage.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Additional
 
-## Running unit tests
+- I18n feature: English and German languages are supported.
+- Displayed the total quantity of task and users.
+- Code linting and formatting setup.
+- Deployment setup.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Tech stack
 
-## Running end-to-end tests
+- Angular 17
+- Nebular UI
+- Bootstrap 5
+- Firebase Hosting
+- ngx-translate
+- uuid
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Commands
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- `ng serve` - for a dev server.
+- `ng build` - to build the project.
+- `ng test` - to execute the unit tests.
+- `firebase deploy` - to deploy the application to Firebase hosting.

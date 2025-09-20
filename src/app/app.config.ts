@@ -1,6 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { provideRouter } from '@angular/router';
 import {
@@ -17,7 +16,6 @@ import { ROUTES } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(),
     provideRouter(ROUTES),
     importProvidersFrom(NbThemeModule.forRoot()),
     importProvidersFrom(NbEvaIconsModule),
