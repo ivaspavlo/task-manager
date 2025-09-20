@@ -19,6 +19,7 @@
   "user": "User",
   "cancel": "Cancel",
   "create": "Create",
+  "update": "Update",
   "delete-task": "Delete Task",
   "delete-task-message": "Are you sure you want to delete this task? This action cannot be undone.",
   "user-name": "User name",
@@ -30,11 +31,16 @@
   "done": "Done",
   "success": "Success",
   "no-assigned-tasks": "No assigned tasks",
+  "state": "State",
+  "state-message": "Assign a user to change the state",
+  "edit-task": "Edit task",
   "toasts": {
     "task-created": "Task was created",
     "task-deleted": "Task was deleted",
+    "task-updated": "Task was updated",
     "user-created": "User was created",
-    "user-deleted": "User was deleted"
+    "user-deleted": "User was deleted",
+    "user-updated": "User was updated"
   },
   "errors": {
     "name-required": "Name is required",

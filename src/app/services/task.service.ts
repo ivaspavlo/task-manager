@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ITask } from '@app/interfaces';
+import { ITask, ITaskCreate } from '@app/interfaces';
 import { LOCAL_STORAGE_KEY, TASK_STATE } from '@app/constants';
 import { LocalStoreService } from './local-store.service';
 
@@ -31,7 +31,7 @@ export class TaskService {
     return this.#tasks$.asObservable();
   }
 
-  public createTask(task: Omit<ITask, 'id' | 'createdAt' | 'updatedAt' | 'state'>): void {
+  public createTask(task: ITaskCreate): void {
     const id = uuidv4();
 
     const tasks = [
@@ -60,6 +60,20 @@ export class TaskService {
     const tasks = this.#tasks$.value.map(t =>
       t.userId === userId ? { ...t, userId: null, state: TASK_STATE.IN_QUEUE } : t
     );
+    this.#save(tasks);
+  }
+
+  public updateTask(updates: ITask): void {
+    const tasks = this.#tasks$.value.map(task =>
+      task.id === updates.id
+        ? {
+            ...task,
+            ...updates,
+            updatedAt: new Date()
+          }
+        : task
+    );
+
     this.#save(tasks);
   }
 }

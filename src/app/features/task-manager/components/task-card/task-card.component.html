@@ -4,15 +4,35 @@
       <div>
         <h6>{{ task.name }}</h6>
 
-        <nb-tag
-          status="primary"
-          appearance="outline"
-          [text]="taskStateMap[task.state] | translate"
-          class="mt-2"></nb-tag>
+        @switch (task.state) {
+          @case (taskState.DONE) {
+            <nb-tag
+              status="success"
+              appearance="outline"
+              [text]="taskStateMap[task.state] | translate"
+              class="mt-2"></nb-tag>
+          }
+
+          @case (taskState.IN_PROCESS) {
+            <nb-tag
+              status="primary"
+              appearance="outline"
+              [text]="taskStateMap[task.state] | translate"
+              class="mt-2"></nb-tag>
+          }
+
+          @case (taskState.IN_QUEUE) {
+            <nb-tag
+              status="default"
+              appearance="outline"
+              [text]="taskStateMap[task.state] | translate"
+              class="mt-2"></nb-tag>
+          }
+        }
       </div>
 
       <div class="d-flex">
-        <button nbButton outline status="success" class="mx-2">
+        <button (click)="onEditTaskClick()" nbButton outline status="success" class="mx-2">
           <nb-icon icon="edit-2-outline"></nb-icon>
         </button>
 

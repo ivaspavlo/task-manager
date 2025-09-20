@@ -3,7 +3,7 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbTagModule } from '@nebula
 import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ITask } from '@app/interfaces';
-import { TASK_STATE_MAP } from '@app/constants';
+import { TASK_STATE, TASK_STATE_MAP } from '@app/constants';
 
 @Component({
   selector: 'app-task-card',
@@ -15,11 +15,18 @@ import { TASK_STATE_MAP } from '@app/constants';
 })
 export class TaskCardComponent {
   @Input({ required: true }) task!: ITask;
-  @Output() delete: EventEmitter<any> = new EventEmitter();
 
+  @Output() delete: EventEmitter<ITask> = new EventEmitter();
+  @Output() edit: EventEmitter<ITask> = new EventEmitter();
+
+  protected taskState = TASK_STATE;
   protected taskStateMap = TASK_STATE_MAP;
 
   protected onCardDeleteClick(): void {
     this.delete.emit(this.task);
+  }
+
+  protected onEditTaskClick(): void {
+    this.edit.emit(this.task);
   }
 }

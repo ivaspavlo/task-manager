@@ -9,3 +9,9 @@ export interface ITask {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface ITaskCreate {
+  name: string;
+  desc: string;
+  userId?: string;
+}

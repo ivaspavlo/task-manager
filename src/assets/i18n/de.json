@@ -19,6 +19,7 @@
   "user": "Benutzer",
   "cancel": "Stornieren",
   "create": "Erstellen",
+  "update": "Aktualisieren",
   "delete": "Löschen",
   "delete-task": "Aufgabe löschen",
   "delete-task-message": "Möchten Sie diese Aufgabe wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -31,11 +32,16 @@
   "done": "Erledigt",
   "success": "Erfolg",
   "no-assigned-tasks": "Keine zugewiesenen Aufgaben",
+  "state": "Status",
+  "state-message": "Weisen Sie einen Benutzer zum Ändern des Status zu",
+  "edit-task": "Aufgabe bearbeiten",
   "toasts": {
     "task-created": "Aufgabe wurde erstellt",
     "task-deleted": "Aufgabe wurde gelöscht",
+    "task-updated": "Aufgabe wurde aktualisiert",
     "user-created": "Benutzer wurde erstellt",
-    "user-deleted": "Benutzer wurde gelöscht"
+    "user-deleted": "Benutzer wurde gelöscht",
+    "user-updated": "Benutzer wurde aktualisiert"
   },
   "errors": {
     "name-required": "Name ist erforderlich",

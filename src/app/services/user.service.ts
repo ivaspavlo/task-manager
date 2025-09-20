@@ -54,6 +54,14 @@ export class UserService {
     this.#save(users);
   }
 
+  public addTaskToUser(userId: string, taskId: string): void {
+    const users = this.#users$.value.map(u =>
+      u.id === userId && !u.taskIds.includes(taskId) ? { ...u, taskIds: [...u.taskIds, taskId] } : u
+    );
+
+    this.#save(users);
+  }
+
   public deleteUser(userId: string): void {
     const users = this.#users$.value.filter(u => u.id !== userId);
     this.#save(users);
