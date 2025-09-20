@@ -10,7 +10,7 @@
           <nb-icon icon="edit-2-outline"></nb-icon>
         </button>
 
-        <button nbButton outline status="danger" class="mx-2">
+        <button (click)="onUserDeleteClick()" nbButton outline status="danger" class="mx-2">
           <nb-icon icon="trash-2-outline"></nb-icon>
         </button>
       </div>
@@ -27,7 +27,11 @@
             <b>{{ 'Test task #1' }}</b>
           </span>
 
-          <nb-tag status="primary" appearance="outline" text="In progress" class="mt-2"></nb-tag>
+          <nb-tag
+            status="primary"
+            appearance="outline"
+            [text]="'in-progress' | translate"
+            class="mt-2"></nb-tag>
         </div>
       </nb-list-item>
 
@@ -37,7 +41,11 @@
             <b>{{ 'Test task #1' }}</b>
           </span>
 
-          <nb-tag status="primary" appearance="outline" text="In progress" class="mt-2"></nb-tag>
+          <nb-tag
+            status="primary"
+            appearance="outline"
+            [text]="'in-progress' | translate"
+            class="mt-2"></nb-tag>
         </div>
       </nb-list-item>
     </nb-list>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   NbButtonModule,
   NbCardModule,
@@ -16,4 +16,11 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './user-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserCardComponent {}
+export class UserCardComponent {
+  @Input() user: any = true;
+  @Output() delete: EventEmitter<any> = new EventEmitter();
+
+  protected onUserDeleteClick(): void {
+    this.delete.emit(this.user);
+  }
+}

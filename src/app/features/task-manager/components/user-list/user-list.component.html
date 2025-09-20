@@ -1,13 +1,94 @@
 <div class="list-header">
   <h6>{{ 'users' | translate }}</h6>
 
-  <button nbButton status="primary" size="medium">
+  <button (click)="onCreateUser(createUserDialog)" nbButton status="primary" size="medium">
     <nb-icon icon="plus-outline"></nb-icon>
 
     <span>{{ 'create-user' | translate }}</span>
   </button>
 </div>
 
+<!-- Create user dialog -->
+<ng-template #createUserDialog let-data let-ref="dialogRef">
+  <nb-card class="form-dialog">
+    <nb-card-header>
+      <h6>{{ 'create-user' | translate }}</h6>
+    </nb-card-header>
+
+    <nb-card-body>
+      <form [formGroup]="createUserForm" class="d-grid row-gap-4">
+        <div>
+          <label class="fs-7 fw-bold mb-1" for="createUserName">{{
+            'user-name' | translate
+          }}</label>
+
+          <div class="position-relative">
+            <input
+              [formControl]="createUserForm.controls.name"
+              id="createUserName"
+              type="text"
+              nbInput
+              fullWidth
+              shape="rectangle"
+              [placeholder]="'enter-user-name' | translate"
+              status="primary" />
+
+            @if (createUserForm.controls.name.touched || createUserForm.controls.name.dirty) {
+              @if (createUserForm.controls.name.errors?.['required']) {
+                <small class="form-error">{{ 'errors.name-required' | translate }}</small>
+              } @else if (createUserForm.controls.name.errors?.['minlength']) {
+                <small class="form-error">{{ 'errors.name-too-short' | translate }}</small>
+              }
+            }
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+
+    <nb-card-footer>
+      <div class="d-flex justify-content-between">
+        <button nbButton (click)="ref.close(null)">{{ 'cancel' | translate }}</button>
+        <button
+          [disabled]="!createUserForm.valid"
+          nbButton
+          outline
+          status="success"
+          (click)="ref.close(createUserForm.value)">
+          {{ 'create' | translate }}
+        </button>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<!-- Delete user dialog -->
+<ng-template #deleteUserDialog let-data let-ref="dialogRef">
+  <nb-card class="form-dialog">
+    <nb-card-header>
+      <div class="d-flex align-items-center">
+        <nb-icon icon="alert-circle-outline" class="me-2"></nb-icon>
+        <h6>{{ 'delete-user' | translate }}</h6>
+      </div>
+    </nb-card-header>
+
+    <nb-card-body>
+      <span class="d-flex justify-content-center py-3">{{
+        'delete-user-message' | translate
+      }}</span>
+    </nb-card-body>
+
+    <nb-card-footer>
+      <div class="d-flex justify-content-between">
+        <button nbButton (click)="ref.close(false)">{{ 'cancel' | translate }}</button>
+        <button nbButton outline status="danger" (click)="ref.close(true)">
+          {{ 'delete' | translate }}
+        </button>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<!-- Empty state -->
 <!-- <nb-card>
   <nb-card-body>
     <div class="d-flex justify-content-center align-items-center">
@@ -18,8 +99,9 @@
   </nb-card-body>
 </nb-card> -->
 
+<!-- Users list -->
 <ul>
   <li>
-    <app-user-card></app-user-card>
+    <app-user-card (delete)="onDeleteUser($event, deleteUserDialog)"></app-user-card>
   </li>
 </ul>

@@ -30,10 +30,12 @@
   </nb-layout-header>
 
   <nb-layout-column>
-    <router-outlet />
+    <div class="app-container">
+      <router-outlet />
+    </div>
   </nb-layout-column>
 
-  <nb-layout-footer>
-    <span class="app-footer">Made for InventorSoft with ❤️</span>
+  <nb-layout-footer fixed>
+    <span class="app-footer">{{ 'footer-message' | translate }}</span>
   </nb-layout-footer>
 </nb-layout>

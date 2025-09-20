@@ -2,7 +2,7 @@ import { ApplicationConfig } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 
 import { provideRouter } from '@angular/router';
-import { NbThemeModule } from '@nebular/theme';
+import { NbDialogModule, NbThemeModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -16,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(ROUTES),
     importProvidersFrom(NbThemeModule.forRoot()),
     importProvidersFrom(NbEvaIconsModule),
+    importProvidersFrom(NbDialogModule.forRoot()),
     provideHttpClient(),
     provideTranslateService({
       loader: provideTranslateHttpLoader({

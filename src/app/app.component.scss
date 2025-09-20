@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.app-container {
+  display: flex;
+  justify-content: center;
+}
+
 .app-footer {
   color: grey;
   font-size: 0.75rem;

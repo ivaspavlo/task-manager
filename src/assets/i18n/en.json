@@ -1,6 +1,7 @@
 {
   "title": "Task Manager",
   "subtitle": "Manage your tasks and team members efficiently",
+  "footer-message": "Made for InventorSoft with ❤️",
   "tasks": "Tasks",
   "users": "Users",
   "create-task": "Create task",
@@ -9,5 +10,26 @@
   "no-users": "No users yet. Create your first user!",
   "created": "Created",
   "modified": "Modified",
-  "assigned-tasks": "Assigned tasks"
+  "assigned-tasks": "Assigned tasks",
+  "enter-task-name": "Enter task name",
+  "enter-task-desc": "Enter task description",
+  "select-user": "Select a user",
+  "task-name": "Task name",
+  "desc": "Description",
+  "user": "User",
+  "cancel": "Cancel",
+  "create": "Create",
+  "delete-task": "Delete Task",
+  "delete-task-message": "Are you sure you want to delete this task? This action cannot be undone.",
+  "user-name": "User name",
+  "enter-user-name": "Enter user name",
+  "delete-user": "Delete user",
+  "delete-user-message": "Are you sure you want to delete this user? All assigned tasks will be unassigned and moved to 'in queue' state.",
+  "in-progress": "In progress",
+  "errors": {
+    "name-required": "Name is required",
+    "name-too-short": "Name is too short",
+    "desc-required": "Description is required",
+    "desc-too-short": "Description is too short"
+  }
 }

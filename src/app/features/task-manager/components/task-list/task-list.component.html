@@ -1,13 +1,141 @@
 <div class="list-header">
   <h6>{{ 'tasks' | translate }}</h6>
 
-  <button nbButton status="primary" size="medium">
+  <button nbButton status="primary" size="medium" (click)="onCreateTask(createTaskDialog)">
     <nb-icon icon="plus-outline"></nb-icon>
 
     <span>{{ 'create-task' | translate }}</span>
   </button>
 </div>
 
+<!-- Create task dialog -->
+<ng-template #createTaskDialog let-data let-ref="dialogRef">
+  <nb-card class="form-dialog">
+    <nb-card-header>
+      <h6>{{ 'create-task' | translate }}</h6>
+    </nb-card-header>
+
+    <nb-card-body>
+      <form [formGroup]="createTaskForm" class="d-grid row-gap-4">
+        <div>
+          <label class="fs-7 fw-bold mb-1" for="createTaskName">{{
+            'task-name' | translate
+          }}</label>
+
+          <div class="position-relative">
+            <input
+              [formControl]="createTaskForm.controls.name"
+              id="createTaskName"
+              type="text"
+              nbInput
+              fullWidth
+              shape="rectangle"
+              [placeholder]="'enter-task-name' | translate"
+              status="primary" />
+
+            @if (createTaskForm.controls.name.touched || createTaskForm.controls.name.dirty) {
+              @if (createTaskForm.controls.name.errors?.['required']) {
+                <small class="form-error">{{ 'errors.name-required' | translate }}</small>
+              } @else if (createTaskForm.controls.name.errors?.['minlength']) {
+                <small class="form-error">{{ 'errors.name-too-short' | translate }}</small>
+              }
+            }
+          </div>
+        </div>
+
+        <div>
+          <label class="fs-7 fw-bold mb-1" for="createTaskDesc">{{ 'desc' | translate }}</label>
+
+          <div class="position-relative">
+            <input
+              [formControl]="createTaskForm.controls.desc"
+              id="createTaskDesc"
+              type="text"
+              nbInput
+              fullWidth
+              shape="rectangle"
+              [placeholder]="'enter-task-desc' | translate"
+              status="primary" />
+
+            @if (createTaskForm.controls.desc.touched || createTaskForm.controls.desc.dirty) {
+              @if (createTaskForm.controls.desc.errors?.['required']) {
+                <small class="form-error">{{ 'errors.desc-required' | translate }}</small>
+              } @else if (createTaskForm.controls.desc.errors?.['minlength']) {
+                <small class="form-error">{{ 'errors.desc-too-short' | translate }}</small>
+              }
+            }
+          </div>
+        </div>
+
+        <div class="d-flex flex-column">
+          <label class="fs-7 fw-bold mb-1" for="createTaskUser">{{ 'user' | translate }}</label>
+
+          <div class="position-relative">
+            <nb-select
+              [formControl]="createTaskForm.controls.user"
+              status="primary"
+              [placeholder]="'select-user' | translate"
+              id="createTaskUser"
+              fullWidth="true">
+              @for (user of users; track $index) {
+                <nb-option [value]="user.id">{{ user.name }}</nb-option>
+              }
+            </nb-select>
+
+            @if (createTaskForm.controls.user.touched || createTaskForm.controls.user.dirty) {
+              @if (createTaskForm.controls.user.errors?.['required']) {
+                <small class="form-error">{{ 'errors.desc-required' | translate }}</small>
+              }
+            }
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+
+    <nb-card-footer>
+      <div class="d-flex justify-content-between">
+        <button nbButton (click)="ref.close(null)">{{ 'cancel' | translate }}</button>
+        <button
+          [disabled]="!createTaskForm.valid"
+          nbButton
+          outline
+          status="success"
+          (click)="ref.close(createTaskForm.value)">
+          {{ 'create' | translate }}
+        </button>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<!-- Delete task dialog -->
+<ng-template #deleteTaskDialog let-data let-ref="dialogRef">
+  <nb-card class="form-dialog">
+    <nb-card-header>
+      <div class="d-flex align-items-center">
+        <nb-icon icon="alert-circle-outline" class="me-2"></nb-icon>
+        <h6>{{ 'delete-task' | translate }}</h6>
+      </div>
+    </nb-card-header>
+
+    <nb-card-body>
+      <span class="d-flex justify-content-center py-3">{{
+        'delete-task-message' | translate
+      }}</span>
+    </nb-card-body>
+
+    <nb-card-footer>
+      <div class="d-flex justify-content-between">
+        <button nbButton (click)="ref.close(false)">{{ 'cancel' | translate }}</button>
+        <button nbButton outline status="danger" (click)="ref.close(true)">
+          {{ 'delete' | translate }}
+        </button>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
+
+<!-- Empty state -->
 <!-- <nb-card>
   <nb-card-body>
     <div class="d-flex justify-content-center align-items-center">
@@ -18,8 +146,9 @@
   </nb-card-body>
 </nb-card> -->
 
+<!-- Tasks list -->
 <ul>
   <li>
-    <app-task-card></app-task-card>
+    <app-task-card (delete)="onDeleteTask($event, deleteTaskDialog)"></app-task-card>
   </li>
 </ul>

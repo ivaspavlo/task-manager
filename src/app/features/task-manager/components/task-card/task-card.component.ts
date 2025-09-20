@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { NbButtonModule, NbCardModule, NbIconModule, NbTagModule } from '@nebular/theme';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -10,4 +10,11 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './task-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskCardComponent {}
+export class TaskCardComponent {
+  @Input() task: any = true;
+  @Output() delete: EventEmitter<any> = new EventEmitter();
+
+  protected onCardDeleteClick(): void {
+    this.delete.emit(this.task);
+  }
+}

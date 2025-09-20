@@ -1,6 +1,7 @@
 {
   "title": "Aufgabenmanager",
   "subtitle": "Verwalten Sie Ihre Aufgaben und Teammitglieder effizient",
+  "footer-message": "Hergestellt für InventorSoft mit ❤️",
   "tasks": "Aufgaben",
   "users": "Benutzer",
   "create-task": "Aufgabe erstellen",
@@ -9,5 +10,26 @@
   "no-users": "Noch keine Benutzer. Erstellen Sie Ihren ersten Benutzer!",
   "created": "Erstellt",
   "modified": "Geändert",
-  "assigned-tasks": "Zugewiesene Aufgaben"
+  "assigned-tasks": "Zugewiesene Aufgaben",
+  "enter-task-name": "Geben Sie den Aufgabennamen ein",
+  "enter-task-desc": "Aufgabenbeschreibung eingeben",
+  "select-user": "Wählen Sie einen Benutzer aus",
+  "task-name": "Aufgabenname",
+  "desc": "Beschreibung",
+  "user": "Benutzer",
+  "cancel": "Stornieren",
+  "create": "Erstellen",
+  "delete-task": "Aufgabe löschen",
+  "delete": "Löschen",
+  "delete-message": "Möchten Sie diese Aufgabe wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+  "user-name": "Benutzer Name",
+  "enter-user-name": "Benutzernamen eingeben",
+  "delete-user": "Benutzer löschen",
+  "in-progress": "Im Gange",
+  "errors": {
+    "name-required": "Name ist erforderlich",
+    "name-too-short": "Der Name ist zu kurz",
+    "desc-required": "Beschreibung ist erforderlich",
+    "desc-too-short": "Beschreibung ist zu kurz"
+  }
 }
