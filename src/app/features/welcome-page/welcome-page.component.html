@@ -1,1 +1,17 @@
-<p>welcome-page works!</p>
+<nb-card>
+  <nb-card-body>
+    <div class="pb-4 px-4 d-flex flex-column justify-content-center align-items-center">
+      <h1>{{ 'welcome-title' | translate }}</h1>
+
+      <button
+        size="large"
+        nbButton
+        hero
+        status="success"
+        [routerLink]="['/task-manager']"
+        class="w-50">
+        {{ 'welcome-button' | translate }}
+      </button>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,5 +1,7 @@
 {
-  "title": "Aufgabenmanager",
+  "welcome-title": "Hallo! 👋 Willkommen im Task-Manager!",
+  "welcome-subtitle": "Optimieren Sie Ihren Workflow und steigern Sie Ihre Produktivität",
+  "welcome-button": "Erste Schritte",
   "subtitle": "Verwalten Sie Ihre Aufgaben und Teammitglieder effizient",
   "footer-message": "Hergestellt für InventorSoft mit ❤️",
   "tasks": "Aufgaben",

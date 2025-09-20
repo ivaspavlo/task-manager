@@ -1,5 +1,7 @@
 {
-  "title": "Task Manager",
+  "welcome-title": "Hey there! 👋 Welcome to Task Manager!",
+  "welcome-subtitle": "Streamline your workflow and boost productivity",
+  "welcome-button": "Get started",
   "subtitle": "Manage your tasks and team members efficiently",
   "footer-message": "Made for InventorSoft with ❤️",
   "tasks": "Tasks",

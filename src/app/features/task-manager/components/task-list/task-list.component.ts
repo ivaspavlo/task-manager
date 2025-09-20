@@ -172,7 +172,7 @@ export class TaskListComponent {
           t => t.userId === currUserId && t.state === TASK_STATE.IN_PROGRESS
         );
 
-        if (userIsBusy) {
+        if (userIsBusy && value.state === TASK_STATE.IN_PROGRESS) {
           this.#toastrService.danger(
             this.#translateService.instant('Error'),
             this.#translateService.instant('toasts.user-is-busy')
