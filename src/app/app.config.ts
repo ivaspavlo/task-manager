@@ -1,22 +1,35 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { provideRouter } from '@angular/router';
-import { NbDialogModule, NbThemeModule } from '@nebular/theme';
+import {
+  NbDialogModule,
+  NbGlobalPhysicalPosition,
+  NbThemeModule,
+  NbToastrModule
+} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ROUTES } from './app.routes';
 
-import { importProvidersFrom } from '@angular/core';
-
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideRouter(ROUTES),
     importProvidersFrom(NbThemeModule.forRoot()),
     importProvidersFrom(NbEvaIconsModule),
     importProvidersFrom(NbDialogModule.forRoot()),
+    importProvidersFrom(
+      NbToastrModule.forRoot({
+        duration: 2000,
+        position: NbGlobalPhysicalPosition.BOTTOM_RIGHT,
+        destroyByClick: true,
+        preventDuplicates: true
+      })
+    ),
     provideHttpClient(),
     provideTranslateService({
       loader: provideTranslateHttpLoader({

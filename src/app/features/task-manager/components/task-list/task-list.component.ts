@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, TemplateRef } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { Observable } from 'rxjs';
 import {
   NbButtonModule,
   NbCardModule,
@@ -14,12 +16,15 @@ import {
   NbIconModule,
   NbInputModule,
   NbSelectModule,
-  NbTagModule
+  NbTagModule,
+  NbToastrService
 } from '@nebular/theme';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
+import { TaskService, UserService } from '@app/services';
 import { TaskCardComponent } from '../task-card/task-card.component';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+
+import { ITask, IUser } from '@app/interfaces';
 
 interface ICreateTaskUser {
   name: string;
@@ -29,13 +34,7 @@ interface ICreateTaskUser {
 interface ICreateTaskForm {
   name: FormControl<string | null>;
   desc: FormControl<string | null>;
-  user: FormControl<ICreateTaskUser | null>;
-}
-
-interface ICreateTaskFormValue {
-  name: string | null;
-  desc: string | null;
-  user: ICreateTaskUser | null;
+  userId: FormControl<ICreateTaskUser | null>;
 }
 
 @Component({
@@ -43,7 +42,6 @@ interface ICreateTaskFormValue {
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    JsonPipe,
     AsyncPipe,
     NbCardModule,
     NbButtonModule,
@@ -62,30 +60,43 @@ interface ICreateTaskFormValue {
 export class TaskListComponent {
   #fb: FormBuilder = inject(FormBuilder);
   #dialogService: NbDialogService = inject(NbDialogService);
+  #toastrService: NbToastrService = inject(NbToastrService);
+  #translateService: TranslateService = inject(TranslateService);
 
-  protected users: ICreateTaskUser[] = [{ name: 'Test User #1', id: '1' }];
+  #taskService: TaskService = inject(TaskService);
+  #userService: UserService = inject(UserService);
+
+  protected tasks$: Observable<ITask[]> = this.#taskService.getTasks();
+  protected users$: Observable<IUser[]> = this.#userService.getUsers();
 
   protected createTaskForm: FormGroup<ICreateTaskForm> = this.#fb.group({
     name: this.#fb.control<string | null>(null, [Validators.required, Validators.minLength(3)]),
     desc: this.#fb.control<string | null>(null, [Validators.required, Validators.minLength(10)]),
-    user: this.#fb.control<ICreateTaskUser | null>(null, [Validators.required])
+    userId: this.#fb.control<ICreateTaskUser | null>(null)
   });
 
   protected onCreateTask(dialog: TemplateRef<unknown>): void {
     this.#dialogService
-      .open(dialog, { context: 'test' })
+      .open(dialog)
       .onClose.pipe()
-      .subscribe((value: ICreateTaskFormValue | null | undefined) => {
+      .subscribe((value: any | null | undefined) => {
         if (!value) {
           this.createTaskForm.reset();
           return;
         }
 
-        console.log(this.createTaskForm.value);
+        this.#taskService.createTask(value);
+
+        this.createTaskForm.reset();
+
+        this.#toastrService.success(
+          this.#translateService.instant('success'),
+          this.#translateService.instant('toasts.task-created')
+        );
       });
   }
 
-  protected onDeleteTask(task: any, dialog: TemplateRef<unknown>): void {
+  protected onDeleteTask(task: ITask, dialog: TemplateRef<unknown>): void {
     console.log(task);
 
     this.#dialogService
@@ -95,6 +106,16 @@ export class TaskListComponent {
         if (!value) {
           return;
         }
+
+        this.#taskService.deleteTask(task.id);
+        if (task?.userId) {
+          this.#userService.deleteTaskFromUser(task.userId, task.id);
+        }
+
+        this.#toastrService.info(
+          this.#translateService.instant('success'),
+          this.#translateService.instant('toasts.task-deleted')
+        );
       });
   }
 }

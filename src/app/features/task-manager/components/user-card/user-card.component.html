@@ -2,7 +2,7 @@
   <nb-card-header>
     <div class="d-flex align-items-center justify-content-between w-100">
       <div>
-        <h6>Test user #1</h6>
+        <h6>{{ user.name }}</h6>
       </div>
 
       <div class="d-flex">
@@ -18,56 +18,28 @@
   </nb-card-header>
 
   <nb-card-body>
-    <p class="mb-3">{{ 'assigned-tasks' | translate }} ({{ 1 }})</p>
+    <p class="mb-3">{{ 'assigned-tasks' | translate }} ({{ user.taskIds.length }})</p>
 
-    <nb-list class="assigned-tasks">
-      <nb-list-item class="assigned-tasks__item">
-        <div class="w-100 d-flex justify-content-between align-items-center">
-          <span>
-            <b>{{ 'Test task #1' }}</b>
-          </span>
+    @if (user.taskIds.length) {
+      <nb-list class="assigned-tasks">
+        @for (task of tasks; track $index) {
+          <nb-list-item class="assigned-tasks__item">
+            <div class="w-100 d-flex justify-content-between align-items-center">
+              <span>
+                <b>{{ 'Test task #1' }}</b>
+              </span>
 
-          <nb-tag
-            status="primary"
-            appearance="outline"
-            [text]="'in-progress' | translate"
-            class="mt-2"></nb-tag>
-        </div>
-      </nb-list-item>
-
-      <nb-list-item class="assigned-tasks__item">
-        <div class="w-100 d-flex justify-content-between align-items-center">
-          <span>
-            <b>{{ 'Test task #1' }}</b>
-          </span>
-
-          <nb-tag
-            status="primary"
-            appearance="outline"
-            [text]="'in-progress' | translate"
-            class="mt-2"></nb-tag>
-        </div>
-      </nb-list-item>
-    </nb-list>
+              <nb-tag
+                status="primary"
+                appearance="outline"
+                [text]="'in-progress' | translate"
+                class="mt-2"></nb-tag>
+            </div>
+          </nb-list-item>
+        }
+      </nb-list>
+    } @else {
+      <p>{{ 'no-assigned-tasks' | translate }}</p>
+    }
   </nb-card-body>
-
-  <!-- <nb-card-footer>
-    <div class="d-flex justify-content-between">
-      <div class="d-flex flex-column">
-        <span class="card-date">
-          <b>{{ 'created' | translate }}</b>
-        </span>
-
-        <span class="card-date">{{ 'Sep 19, 2025, 08:06 PM' }}</span>
-      </div>
-
-      <div class="d-flex flex-column">
-        <span class="card-date">
-          <b>{{ 'modified' | translate }}</b>
-        </span>
-
-        <span class="card-date">{{ 'Sep 19, 2025, 08:06 PM' }}</span>
-      </div>
-    </div>
-  </nb-card-footer> -->
 </nb-card>

@@ -67,28 +67,26 @@
           </div>
         </div>
 
-        <div class="d-flex flex-column">
-          <label class="fs-7 fw-bold mb-1" for="createTaskUser">{{ 'user' | translate }}</label>
+        @if (users$ | async; as users) {
+          @if (users.length) {
+            <div class="d-flex flex-column">
+              <label class="fs-7 fw-bold mb-1" for="createTaskUser">{{ 'user' | translate }}</label>
 
-          <div class="position-relative">
-            <nb-select
-              [formControl]="createTaskForm.controls.user"
-              status="primary"
-              [placeholder]="'select-user' | translate"
-              id="createTaskUser"
-              fullWidth="true">
-              @for (user of users; track $index) {
-                <nb-option [value]="user.id">{{ user.name }}</nb-option>
-              }
-            </nb-select>
-
-            @if (createTaskForm.controls.user.touched || createTaskForm.controls.user.dirty) {
-              @if (createTaskForm.controls.user.errors?.['required']) {
-                <small class="form-error">{{ 'errors.desc-required' | translate }}</small>
-              }
-            }
-          </div>
-        </div>
+              <div class="position-relative">
+                <nb-select
+                  [formControl]="createTaskForm.controls.userId"
+                  [placeholder]="'select-user' | translate"
+                  status="primary"
+                  id="createTaskUser"
+                  fullWidth="true">
+                  @for (user of users; track $index) {
+                    <nb-option [value]="user.id">{{ user.name }}</nb-option>
+                  }
+                </nb-select>
+              </div>
+            </div>
+          }
+        }
       </form>
     </nb-card-body>
 
@@ -135,20 +133,26 @@
   </nb-card>
 </ng-template>
 
-<!-- Empty state -->
-<!-- <nb-card>
-  <nb-card-body>
-    <div class="d-flex justify-content-center align-items-center">
-      <nb-icon icon="alert-circle-outline" class="me-2"></nb-icon>
+@if (tasks$ | async; as tasks) {
+  @if (tasks.length) {
+    <ul>
+      @for (task of tasks; track $index) {
+        <li>
+          <app-task-card
+            [task]="task"
+            (delete)="onDeleteTask($event, deleteTaskDialog)"></app-task-card>
+        </li>
+      }
+    </ul>
+  } @else {
+    <nb-card>
+      <nb-card-body>
+        <div class="d-flex justify-content-center align-items-center">
+          <nb-icon icon="alert-circle-outline" class="me-2"></nb-icon>
 
-      <span class="d-flex justify-content-center py-3">{{ 'no-tasks' | translate }}</span>
-    </div>
-  </nb-card-body>
-</nb-card> -->
-
-<!-- Tasks list -->
-<ul>
-  <li>
-    <app-task-card (delete)="onDeleteTask($event, deleteTaskDialog)"></app-task-card>
-  </li>
-</ul>
+          <span class="d-flex justify-content-center py-3">{{ 'no-tasks' | translate }}</span>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  }
+}

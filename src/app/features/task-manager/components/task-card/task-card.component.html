@@ -2,12 +2,12 @@
   <nb-card-header>
     <div class="d-flex align-items-center justify-content-between w-100">
       <div>
-        <h6>Test task #1</h6>
+        <h6>{{ task.name }}</h6>
 
         <nb-tag
           status="primary"
           appearance="outline"
-          [text]="'in-progress' | translate"
+          [text]="taskStateMap[task.state] | translate"
           class="mt-2"></nb-tag>
       </div>
 
@@ -24,8 +24,7 @@
   </nb-card-header>
 
   <nb-card-body>
-    A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally,
-    nebula was a name for any diffuse astronomical object, including galaxies beyond the Milky Way.
+    <span>{{ task.desc }}</span>
   </nb-card-body>
 
   <nb-card-footer>
@@ -35,7 +34,7 @@
           <b>{{ 'created' | translate }}</b>
         </span>
 
-        <span class="card-date">{{ 'Sep 19, 2025, 08:06 PM' }}</span>
+        <span class="card-date">{{ task.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
       </div>
 
       <div class="d-flex flex-column">
@@ -43,7 +42,7 @@
           <b>{{ 'modified' | translate }}</b>
         </span>
 
-        <span class="card-date">{{ 'Sep 19, 2025, 08:06 PM' }}</span>
+        <span class="card-date">{{ task.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
       </div>
     </div>
   </nb-card-footer>

@@ -1,15 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, TemplateRef } from '@angular/core';
-import {
-  NbButtonModule,
-  NbCardModule,
-  NbDialogService,
-  NbIconModule,
-  NbInputModule,
-  NbTagModule
-} from '@nebular/theme';
-import { TranslatePipe } from '@ngx-translate/core';
-
-import { UserCardComponent } from '../user-card/user-card.component';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -17,13 +7,25 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbDialogService,
+  NbIconModule,
+  NbInputModule,
+  NbTagModule,
+  NbToastrService
+} from '@nebular/theme';
+import { Observable } from 'rxjs';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+
+import { ITask, IUser } from '@app/interfaces';
+import { TaskService, UserService } from '@app/services';
+import { UserCardComponent } from '../user-card/user-card.component';
+import { TasksForUserPipe } from '../../pipes/tasks-for-user.pipe';
 
 interface ICreateUserForm {
   name: FormControl<string | null>;
-}
-
-interface ICreateUserFormValue {
-  name: string | null;
 }
 
 @Component({
@@ -31,13 +33,16 @@ interface ICreateUserFormValue {
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    AsyncPipe,
+    JsonPipe,
     NbCardModule,
     NbButtonModule,
     NbTagModule,
     NbIconModule,
     NbInputModule,
     TranslatePipe,
-    UserCardComponent
+    UserCardComponent,
+    TasksForUserPipe
   ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
@@ -46,6 +51,14 @@ interface ICreateUserFormValue {
 export class UserListComponent {
   #fb: FormBuilder = inject(FormBuilder);
   #dialogService: NbDialogService = inject(NbDialogService);
+  #toastrService: NbToastrService = inject(NbToastrService);
+  #translateService: TranslateService = inject(TranslateService);
+
+  #taskService: TaskService = inject(TaskService);
+  #userService: UserService = inject(UserService);
+
+  protected tasks$: Observable<ITask[]> = this.#taskService.getTasks();
+  protected users$: Observable<IUser[]> = this.#userService.getUsers();
 
   protected createUserForm: FormGroup<ICreateUserForm> = this.#fb.group({
     name: this.#fb.control<string | null>(null, [Validators.required, Validators.minLength(3)])
@@ -55,19 +68,22 @@ export class UserListComponent {
     this.#dialogService
       .open(dialog)
       .onClose.pipe()
-      .subscribe((value: ICreateUserFormValue | null | undefined) => {
+      .subscribe((value: IUser | null | undefined) => {
         if (!value) {
           this.createUserForm.reset();
           return;
         }
 
-        console.log(this.createUserForm.value);
+        this.#userService.createUser(value);
+
+        this.#toastrService.success(
+          this.#translateService.instant('success'),
+          this.#translateService.instant('toasts.user-created')
+        );
       });
   }
 
-  protected onDeleteUser(user: any, dialog: TemplateRef<unknown>): void {
-    console.log(user);
-
+  protected onDeleteUser(user: IUser, dialog: TemplateRef<unknown>): void {
     this.#dialogService
       .open(dialog)
       .onClose.pipe()
@@ -75,6 +91,14 @@ export class UserListComponent {
         if (!value) {
           return;
         }
+
+        this.#userService.deleteUser(user.id);
+        this.#taskService.deleteTasksOfUser(user.id);
+
+        this.#toastrService.success(
+          this.#translateService.instant('success'),
+          this.#translateService.instant('toasts.user-deleted')
+        );
       });
   }
 }

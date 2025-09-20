@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ITask, IUser } from '@app/interfaces';
 import {
   NbButtonModule,
   NbCardModule,
@@ -17,7 +18,9 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserCardComponent {
-  @Input() user: any = true;
+  @Input({ required: true }) user!: IUser;
+  @Input({ required: true }) tasks: ITask[] = [];
+
   @Output() delete: EventEmitter<any> = new EventEmitter();
 
   protected onUserDeleteClick(): void {
