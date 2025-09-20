@@ -21,9 +21,6 @@ export class UserCardComponent {
   @Input({ required: true }) user!: IUser;
   @Input({ required: true }) tasks: ITask[] = [];
 
-  @Output() delete: EventEmitter<any> = new EventEmitter();
-
-  protected onUserDeleteClick(): void {
-    this.delete.emit(this.user);
-  }
+  @Output() delete: EventEmitter<IUser> = new EventEmitter();
+  @Output() edit: EventEmitter<IUser> = new EventEmitter();
 }

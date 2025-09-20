@@ -3,3 +3,8 @@ export interface IUser {
   name: string;
   taskIds: string[];
 }
+
+export interface IUserUpdate {
+  id: string;
+  name: string;
+}

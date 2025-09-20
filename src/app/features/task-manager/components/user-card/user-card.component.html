@@ -6,11 +6,11 @@
       </div>
 
       <div class="d-flex">
-        <button nbButton outline status="success" class="mx-2">
+        <button (click)="edit.emit(this.user)" nbButton outline status="success" class="mx-2">
           <nb-icon icon="edit-2-outline"></nb-icon>
         </button>
 
-        <button (click)="onUserDeleteClick()" nbButton outline status="danger" class="mx-2">
+        <button (click)="delete.emit(this.user)" nbButton outline status="danger" class="mx-2">
           <nb-icon icon="trash-2-outline"></nb-icon>
         </button>
       </div>

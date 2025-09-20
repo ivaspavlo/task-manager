@@ -6,6 +6,8 @@
   "users": "Benutzer",
   "create-task": "Aufgabe erstellen",
   "create-user": "Benutzer erstellen",
+  "edit-task": "Aufgabe bearbeiten",
+  "edit-user": "Benutzer bearbeiten",
   "no-tasks": "Noch keine Aufgaben. Erstellen Sie Ihre erste Aufgabe!",
   "no-users": "Noch keine Benutzer. Erstellen Sie Ihren ersten Benutzer!",
   "created": "Erstellt",
@@ -34,7 +36,6 @@
   "no-assigned-tasks": "Keine zugewiesenen Aufgaben",
   "state": "Status",
   "state-message": "Weisen Sie einen Benutzer zum Ändern des Status zu",
-  "edit-task": "Aufgabe bearbeiten",
   "toasts": {
     "task-created": "Aufgabe wurde erstellt",
     "task-deleted": "Aufgabe wurde gelöscht",

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, TemplateRef } from '@angular/core';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import {
   FormBuilder,
@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   NbButtonModule,
   NbCardModule,
@@ -19,12 +20,13 @@ import {
 import { Observable } from 'rxjs';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
-import { ITask, IUser } from '@app/interfaces';
+import { ITask, IUser, IUserUpdate } from '@app/interfaces';
 import { TaskService, UserService } from '@app/services';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { TasksForUserPipe } from '../../pipes/tasks-for-user.pipe';
 
-interface ICreateUserForm {
+interface IUserForm {
+  id: FormControl<string | null>;
   name: FormControl<string | null>;
 }
 
@@ -49,6 +51,7 @@ interface ICreateUserForm {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent {
+  #destroyRef: DestroyRef = inject(DestroyRef);
   #fb: FormBuilder = inject(FormBuilder);
   #dialogService: NbDialogService = inject(NbDialogService);
   #toastrService: NbToastrService = inject(NbToastrService);
@@ -59,18 +62,20 @@ export class UserListComponent {
 
   protected tasks$: Observable<ITask[]> = this.#taskService.getTasks();
   protected users$: Observable<IUser[]> = this.#userService.getUsers();
+  protected isEditMode: boolean = false;
 
-  protected createUserForm: FormGroup<ICreateUserForm> = this.#fb.group({
+  protected userForm: FormGroup<IUserForm> = this.#fb.group({
+    id: this.#fb.control<string | null>(null),
     name: this.#fb.control<string | null>(null, [Validators.required, Validators.minLength(3)])
   });
 
   protected onCreateUser(dialog: TemplateRef<unknown>): void {
     this.#dialogService
       .open(dialog)
-      .onClose.pipe()
+      .onClose.pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe((value: IUser | null | undefined) => {
         if (!value) {
-          this.createUserForm.reset();
+          this.userForm.reset();
           return;
         }
 
@@ -86,7 +91,7 @@ export class UserListComponent {
   protected onDeleteUser(user: IUser, dialog: TemplateRef<unknown>): void {
     this.#dialogService
       .open(dialog)
-      .onClose.pipe()
+      .onClose.pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe((value: boolean | undefined) => {
         if (!value) {
           return;
@@ -99,6 +104,29 @@ export class UserListComponent {
           this.#translateService.instant('success'),
           this.#translateService.instant('toasts.user-deleted')
         );
+      });
+  }
+
+  protected onEditUser(value: IUser, dialog: TemplateRef<unknown>): void {
+    this.isEditMode = true;
+
+    this.userForm.patchValue({
+      id: value.id,
+      name: value.name
+    });
+
+    this.#dialogService
+      .open(dialog)
+      .onClose.pipe(takeUntilDestroyed(this.#destroyRef))
+      .subscribe((value: IUserUpdate | null | undefined) => {
+        if (!value) {
+          return;
+        }
+
+        this.#userService.updateUser(value);
+
+        this.userForm.reset();
+        this.isEditMode = false;
       });
   }
 }

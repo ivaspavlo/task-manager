@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
-import { IUser } from '@app/interfaces';
+import { IUser, IUserUpdate } from '@app/interfaces';
 import { LOCAL_STORAGE_KEY } from '@app/constants';
 import { LocalStoreService } from './local-store.service';
 
@@ -64,6 +64,13 @@ export class UserService {
 
   public deleteUser(userId: string): void {
     const users = this.#users$.value.filter(u => u.id !== userId);
+
+    this.#save(users);
+  }
+
+  public updateUser(value: IUserUpdate): void {
+    const users = this.#users$.value.map(u => (u.id === value.id ? { ...u, ...value } : u));
+
     this.#save(users);
   }
 }

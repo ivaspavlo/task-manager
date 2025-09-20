@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { NbButtonModule, NbCardModule, NbIconModule, NbTagModule } from '@nebular/theme';
 import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+
 import { ITask } from '@app/interfaces';
 import { TASK_STATE, TASK_STATE_MAP } from '@app/constants';
 
@@ -21,12 +22,4 @@ export class TaskCardComponent {
 
   protected taskState = TASK_STATE;
   protected taskStateMap = TASK_STATE_MAP;
-
-  protected onCardDeleteClick(): void {
-    this.delete.emit(this.task);
-  }
-
-  protected onEditTaskClick(): void {
-    this.edit.emit(this.task);
-  }
 }

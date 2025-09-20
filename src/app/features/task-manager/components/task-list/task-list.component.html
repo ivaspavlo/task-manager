@@ -22,14 +22,14 @@
     <nb-card-body>
       <form [formGroup]="taskForm" class="d-grid row-gap-4">
         <div>
-          <label class="fs-7 fw-bold mb-1" for="createTaskName">{{
+          <label class="fs-7 fw-bold mb-1" for="taskNameControl">{{
             'task-name' | translate
           }}</label>
 
           <div class="position-relative">
             <input
               [formControl]="taskForm.controls.name"
-              id="createTaskName"
+              id="taskNameControl"
               type="text"
               nbInput
               fullWidth
@@ -48,12 +48,12 @@
         </div>
 
         <div>
-          <label class="fs-7 fw-bold mb-1" for="createTaskDesc">{{ 'desc' | translate }}</label>
+          <label class="fs-7 fw-bold mb-1" for="taskDescControl">{{ 'desc' | translate }}</label>
 
           <div class="position-relative">
             <input
               [formControl]="taskForm.controls.desc"
-              id="createTaskDesc"
+              id="taskDescControl"
               type="text"
               nbInput
               fullWidth
@@ -74,14 +74,16 @@
         @if (users$ | async; as users) {
           @if (users.length) {
             <div class="d-flex flex-column">
-              <label class="fs-7 fw-bold mb-1" for="createTaskUser">{{ 'user' | translate }}</label>
+              <label class="fs-7 fw-bold mb-1" for="taskUserControl">{{
+                'user' | translate
+              }}</label>
 
               <div class="position-relative">
                 <nb-select
                   [formControl]="taskForm.controls.userId"
                   [placeholder]="'select-user' | translate"
                   status="primary"
-                  id="createTaskUser"
+                  id="taskUserControl"
                   fullWidth="true">
                   @for (user of users; track $index) {
                     <nb-option [value]="user.id">{{ user.name }}</nb-option>
@@ -94,13 +96,15 @@
 
         @if (isEditMode) {
           <div class="d-flex flex-column">
-            <label class="fs-7 fw-bold mb-1" for="createTaskUser">{{ 'state' | translate }}</label>
+            <label class="fs-7 fw-bold mb-1" for="taskStateControl">{{
+              'state' | translate
+            }}</label>
 
             <div class="position-relative">
               <nb-select
                 [formControl]="taskForm.controls.state"
                 status="primary"
-                id="createTaskUser"
+                id="taskStateControl"
                 fullWidth="true">
                 @for (state of taskStateMap | keyvalue; track $index) {
                   <nb-option [value]="state.key">{{ state.value | translate }}</nb-option>
