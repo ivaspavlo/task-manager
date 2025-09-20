@@ -1,6 +1,10 @@
-# TasksApp
+# Tasks Manager Application
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+
+## Application link
+
+https://task-manager-9fbab.firebaseapp.com/
 
 ## Project structure
 
@@ -29,8 +33,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - I18n feature: English and German languages are supported.
 - Displayed the total quantity of task and users.
+- Forms validation and error handling;
+- Notification messages after performing actions;
 - Code linting and formatting setup.
 - Deployment setup.
+- And many more :)
 
 ### Tech stack
 
@@ -40,6 +47,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Firebase Hosting
 - ngx-translate
 - uuid
+- eslint
+- prettier
 
 ## Commands
 
