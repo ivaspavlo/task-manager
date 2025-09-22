@@ -29,8 +29,8 @@ export class TaskCardComponent {
   @Input({ required: true }) task!: ITask;
   @Input({ required: true }) users: IUser[] | null = [];
 
-  @Output() delete: EventEmitter<ITask> = new EventEmitter();
-  @Output() edit: EventEmitter<ITask> = new EventEmitter();
+  @Output() delete = new EventEmitter<ITask>();
+  @Output() edit = new EventEmitter<ITask>();
 
   protected taskState = TASK_STATE;
   protected taskStateMap = TASK_STATE_MAP;

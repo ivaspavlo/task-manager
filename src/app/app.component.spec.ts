@@ -1,10 +1,20 @@
 import { TestBed } from '@angular/core/testing';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { NbThemeModule } from '@nebular/theme';
+
+import { FakeLoader } from '../../tests';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [
+        AppComponent,
+        NbThemeModule.forRoot(),
+        TranslateModule.forRoot({
+          loader: { provide: TranslateLoader, useClass: FakeLoader }
+        })
+      ]
     }).compileComponents();
   });
 

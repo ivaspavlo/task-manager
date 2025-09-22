@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, TemplateRef } from '@angular/core';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -36,7 +36,6 @@ interface IUserForm {
   imports: [
     ReactiveFormsModule,
     AsyncPipe,
-    JsonPipe,
     NbCardModule,
     NbButtonModule,
     NbTagModule,
@@ -62,7 +61,7 @@ export class UserListComponent {
 
   protected tasks$: Observable<ITask[]> = this.#taskService.getTasks();
   protected users$: Observable<IUser[]> = this.#userService.getUsers();
-  protected isEditMode: boolean = false;
+  protected isEditMode = false;
 
   protected userForm: FormGroup<IUserForm> = this.#fb.group({
     id: this.#fb.control<string | null>(null),

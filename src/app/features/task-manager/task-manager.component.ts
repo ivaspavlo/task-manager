@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { NbCardModule, NbTabsetModule } from '@nebular/theme';
 import { Observable } from 'rxjs';
@@ -24,12 +24,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
   styleUrl: './task-manager.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskManagerComponent implements OnInit {
+export class TaskManagerComponent {
   #taskService: TaskService = inject(TaskService);
   #userService: UserService = inject(UserService);
 
   protected tasks$: Observable<ITask[]> = this.#taskService.getTasks();
   protected users$: Observable<IUser[]> = this.#userService.getUsers();
-
-  ngOnInit(): void {}
 }

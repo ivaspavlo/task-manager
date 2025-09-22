@@ -30,6 +30,6 @@ export class UserCardComponent {
   @Input({ required: true }) user!: IUser;
   @Input({ required: true }) tasks: ITask[] = [];
 
-  @Output() delete: EventEmitter<IUser> = new EventEmitter();
-  @Output() edit: EventEmitter<IUser> = new EventEmitter();
+  @Output() delete = new EventEmitter<IUser>();
+  @Output() edit = new EventEmitter<IUser>();
 }

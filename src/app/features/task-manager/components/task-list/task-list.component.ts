@@ -70,7 +70,7 @@ export class TaskListComponent {
 
   protected tasks$: Observable<ITask[]> = this.#taskService.getTasks();
   protected users$: Observable<IUser[]> = this.#userService.getUsers();
-  protected isEditMode: boolean = false;
+  protected isEditMode = false;
   protected taskStateMap = TASK_STATE_MAP;
 
   protected taskForm: FormGroup<ITaskForm> = this.#fb.group({

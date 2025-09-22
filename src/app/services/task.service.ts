@@ -51,7 +51,6 @@ export class TaskService {
   }
 
   public deleteTask(id: string): void {
-    const task = this.#tasks$.value.find(t => t.id === id);
     const tasks = this.#tasks$.value.filter(t => t.id !== id);
     this.#save(tasks);
   }
