@@ -32,6 +32,7 @@ https://task-manager-9fbab.firebaseapp.com/
 ### Additional
 
 - I18n feature: English and German languages are supported.
+- Basic responsiveness.
 - Displayed the total quantity of task and users.
 - Forms validation and error handling;
 - Notification messages after performing actions;
