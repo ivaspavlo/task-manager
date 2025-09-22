@@ -3,29 +3,9 @@ import { take } from 'rxjs';
 
 import { TASK_STATE } from '@app/constants';
 import { ITaskCreate } from '@app/interfaces';
+import { MockLocalStoreService } from '../../../tests';
 import { TaskService } from './task.service';
 import { LocalStoreService } from './local-store.service';
-
-class MockLocalStoreService {
-  private store: Record<string, string> = {};
-
-  set<T>(key: string, value: T): void {
-    this.store[key] = JSON.stringify(value);
-  }
-
-  get<T>(key: string): T | null {
-    const raw = this.store[key];
-    return raw ? (JSON.parse(raw) as T) : null;
-  }
-
-  remove(key: string): void {
-    delete this.store[key];
-  }
-
-  clear(): void {
-    this.store = {};
-  }
-}
 
 describe('TaskService', () => {
   let service: TaskService;

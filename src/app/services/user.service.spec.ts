@@ -2,29 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { take } from 'rxjs';
 
 import { IUserUpdate } from '@app/interfaces';
+import { MockLocalStoreService } from '../../../tests';
 import { UserService } from './user.service';
 import { LocalStoreService } from './local-store.service';
-
-class MockLocalStoreService {
-  private store: Record<string, string> = {};
-
-  set<T>(key: string, value: T): void {
-    this.store[key] = JSON.stringify(value);
-  }
-
-  get<T>(key: string): T | null {
-    const raw = this.store[key];
-    return raw ? (JSON.parse(raw) as T) : null;
-  }
-
-  remove(key: string): void {
-    delete this.store[key];
-  }
-
-  clear(): void {
-    this.store = {};
-  }
-}
 
 describe('UserService', () => {
   let service: UserService;
