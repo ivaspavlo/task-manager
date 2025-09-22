@@ -50,10 +50,12 @@ https://task-manager-9fbab.firebaseapp.com/
 - uuid
 - eslint
 - prettier
+- karma/jasmine
 
 ## Commands
 
 - `ng serve` - for a dev server.
 - `ng build` - to build the project.
 - `ng test` - to execute the unit tests.
-- `firebase deploy` - to deploy the application to Firebase hosting.
+- `npm run lint` - to execute linting.
+- `firebase deploy` - to deploy the application to Firebase hosting (previous Firebase setup is required).
